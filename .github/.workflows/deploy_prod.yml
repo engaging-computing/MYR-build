@@ -1,0 +1,19 @@
+name: Deploy the Production MYR Docker Image
+
+on:
+  repository_dispatch:
+    types: [update_master]
+
+jobs:
+  deploy_prod:
+    runs-on: ubuntu-latest
+    container:
+      image: docker
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log into Quay
+        run: docker login quay.io -u umlecg+myr_bot -p ${{ secrets.QUAY_BOT_PASSWORD }}
+      - name: Build the docker image
+        run: docker build -t quay.io/umlecg/myr -f Dockerfile .
+      - name: Deploy the docker image
+        run: docker push quay.io/umlecg/myr:master
