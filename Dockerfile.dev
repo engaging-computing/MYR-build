@@ -1,4 +1,4 @@
-FROM quay.io/umlecg/myr-backend:dev AS frontend
+FROM quay.io/umlecg/myr-frontend:dev AS frontend
 FROM quay.io/umlecg/myr-admin:dev AS admin
 
 FROM quay.io/umlecg/myr-backend:dev
