@@ -5,7 +5,7 @@ on:
     types: [update_dev]
 
 jobs:
-  deploy_prod:
+  deploy_staging:
     runs-on: ubuntu-latest
     container:
       image: docker
@@ -14,6 +14,6 @@ jobs:
       - name: Log into Quay
         run: docker login quay.io -u umlecg+myr_bot -p ${{ secrets.QUAY_BOT_PASSWORD }}
       - name: Build the docker image
-        run: docker build -t quay.io/umlecg/myr -f Dockerfile.dev .
+        run: docker build -t quay.io/umlecg/myr:dev -f Dockerfile.dev .
       - name: Deploy the docker image
         run: docker push quay.io/umlecg/myr:dev
